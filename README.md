@@ -47,7 +47,7 @@ Ask Me ไม่ผูกกับโมเดลหรือค่ายใด�
 ต้องมี [Node.js](https://nodejs.org/) แล้วเปิด Terminal รันคำสั่งนี้:
 
 ```bash
-npx skills add mewic/mewsocial --skill ask-me -g
+npx skills add mewic/ask-me --skill ask-me -g
 ```
 
 ตัวติดตั้งจะแสดงรายชื่อ Agent ที่พบในเครื่อง ให้เลือกตัวที่ต้องการใช้
@@ -55,14 +55,14 @@ npx skills add mewic/mewsocial --skill ask-me -g
 ติดตั้งพร้อมกันใน Claude Code, Codex, OpenClaw และ Hermes Agent:
 
 ```bash
-npx skills add mewic/mewsocial --skill ask-me -g \
+npx skills add mewic/ask-me --skill ask-me -g \
   -a claude-code -a codex -a openclaw -a hermes-agent -y
 ```
 
 ติดตั้งให้ Agent ทุกตัวที่รองรับในเครื่อง:
 
 ```bash
-npx skills add mewic/mewsocial --skill ask-me --agent '*' -g -y
+npx skills add mewic/ask-me --skill ask-me --agent '*' -g -y
 ```
 
 หลังติดตั้ง หากยังไม่เห็น Skill ให้ปิดแล้วเปิด Agent หรือเริ่ม Session ใหม่
@@ -75,7 +75,7 @@ Repository นี้มี [Plugin manifest](.codex-plugin/plugin.json) เต�
 
 ## ติดตั้งใน Claude Chat / Cowork
 
-1. ดาวน์โหลด [`ask-me.zip`](https://github.com/mewic/mewsocial/releases/latest/download/ask-me.zip)
+1. ดาวน์โหลด [`ask-me.zip`](https://github.com/mewic/ask-me/releases/latest/download/ask-me.zip)
 2. เปิด Claude แล้วไปที่ **Customize → Skills**
 3. กด **+ → Create skill → Upload a skill**
 4. เลือกไฟล์ `ask-me.zip` แล้วเปิดใช้งาน Skill
@@ -87,13 +87,13 @@ Skill ที่เปิดไว้สามารถใช้ได้ทั�
 ติดตั้งตรงจาก Public GitHub repository ได้ด้วยคำสั่ง:
 
 ```bash
-hermes skills install mewic/mewsocial/skills/ask-me
+hermes skills install mewic/ask-me/skills/ask-me
 ```
 
 หรือเพิ่ม Mew Social เป็น Skill tap สำหรับติดตั้ง Skill อื่นในอนาคต:
 
 ```bash
-hermes skills tap add mewic/mewsocial
+hermes skills tap add mewic/ask-me
 ```
 
 ## เรียกใช้อย่างไร

@@ -6,8 +6,8 @@
     "name": "Mew Social",
     "url": "https://github.com/mewic"
   },
-  "homepage": "https://github.com/mewic/mewsocial",
-  "repository": "https://github.com/mewic/mewsocial",
+  "homepage": "https://github.com/mewic/ask-me",
+  "repository": "https://github.com/mewic/ask-me",
   "license": "MIT",
   "keywords": [
     "agent-skills",
@@ -27,7 +27,7 @@
       "Interactive",
       "Write"
     ],
-    "websiteURL": "https://github.com/mewic/mewsocial",
+    "websiteURL": "https://github.com/mewic/ask-me",
     "defaultPrompt": [
       "ใช้ Ask Me ถามฉันทีละข้อก่อนเริ่มงาน",
       "ช่วยเปลี่ยนไอเดียนี้เป็น Working Brief ที่ชัดเจน"
