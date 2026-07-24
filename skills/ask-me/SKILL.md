@@ -40,7 +40,7 @@ Recommendation: <suggested answer>
 Because: <short reason tied to the outcome or a constraint>
 ```
 
-- If the user is unsure, offer a safe default and state its consequence. "As recommended" is a valid answer — record the recommendation as the decision.
+- If the user is unsure, offer a safe default and state its consequence. "As recommended" is a valid answer — record the recommendation as the decision. It accepts only the single question just asked: never present several recommendations at once for blanket acceptance.
 - Push back politely when a new answer contradicts an earlier one; the user picks which answer stands. Never silently decide on the user's behalf.
 - **Mandatory minimums — always asked, even if the user rushes:**
   1. **Deliverable format** — what will be delivered, in what format and channel.
@@ -52,7 +52,7 @@ Because: <short reason tied to the outcome or a constraint>
 Before drafting the Working Brief, display a ledger in which every core topic carries exactly one status:
 
 - ✅ **answered** — the user decided this in the interview (cite the answer in a few words)
-- 📄 **from context** — found during recon (cite where)
+- 📄 **from context** — found during recon; cite the exact source (file name and section, or the specific user message). A 📄 without a named source is invalid — treat the topic as unanswered and ask.
 - ➖ **not relevant** — with a one-line reason
 
 Core topics: **Outcome · Problem & audience · Deliverable & format · Scope (in/out) · Constraints & key decisions · Success criteria**
@@ -60,6 +60,7 @@ Core topics: **Outcome · Problem & audience · Deliverable & format · Scope (i
 Rules:
 - Drafting the brief while any topic is status-less is forbidden.
 - Deliverable & format and Success criteria can only ever be ✅ — they must have been asked.
+- Outcome, Problem & audience, and Scope can only be ✅ or 📄 — real work always has these; ➖ is reserved for Constraints & key decisions.
 - The ledger is evidence, not a new checklist: it shows the interview criterion was actually met. The user may redirect ("ask more about X") before any draft exists.
 
 ## Phase 3 — Working Brief
@@ -130,7 +131,7 @@ Never end at the brief silently, and never start work on your own. Ask exactly o
    Before reporting done, verify the result against every item in Success Criteria and report the evidence per item.
    ```
 
-3. **Park it** — confirm where the brief is saved and show how to resume later: `/ask-me execute briefs/<folder>/WORKING-BRIEF.md` (on agents without slash commands: "Use Ask Me to execute <file>").
+3. **Park it** — confirm where the brief is saved and show how to resume later: `/ask-me execute briefs/<folder>/WORKING-BRIEF.md` (on agents without slash commands: "Use Ask Me to execute <file>"). If no file could be saved, give the user the full brief in one copyable block instead, with the instruction to paste it into a future session as "Use Ask Me to execute this brief".
 
 ## Execute Mode
 
@@ -167,7 +168,7 @@ Match model tier to the nature of the task, starting from the model the user alr
 
 1. **Run here** — same session. Right when tasks are small or the current model already fits.
 2. **Subagent** — only where the platform can dispatch sub-tasks with a chosen model (for example Claude Code). Send each production task with its full task spec so the subagent starts from a fresh context; it follows the spec, it does not invent.
-3. **New session** — give the user a ready-to-paste line: `/ask-me execute <path>` plus the recommended model to open the new session with. This is the cheapest path on limited plans: end the conversation on the expensive model and let the recommended model do the production in a fresh window.
+3. **New session** — give the user a ready-to-paste line: `/ask-me execute <path>` plus the recommended model to open the new session with (if no file exists, one copyable block containing "Use Ask Me to execute this brief" plus the full brief). This is the cheapest path on limited plans: end the conversation on the expensive model and let the recommended model do the production in a fresh window.
 
 Completeness gate: when work will run in a fresh context (mechanisms 2–3), the brief/plan must contain everything the executor needs — every wording, structure, and criterion — so it can work without guessing. Fix gaps in the brief first; never let an executor improvise.
 
