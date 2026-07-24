@@ -1,152 +1,198 @@
 ---
 name: ask-me
-description: ถามผู้ใช้ทีละข้อเพื่อเปลี่ยนไอเดียหรือโจทย์ที่ยังไม่ชัดให้เป็น Working Brief ที่ยืนยันแล้ว พร้อมแนะนำคำตอบและหยุดก่อนลงมือทำ ใช้เมื่อขอ Ask Me ช่วยเคลียร์โจทย์ วางขอบเขต หรือทำ brief
+description: Turn a vague idea or task into a confirmed Working Brief by interviewing the user one question at a time, each with a recommended answer, then (only when the user chooses) plan execution with cost-effective model routing. Use when the user invokes Ask Me, wants to clarify scope or requirements before work begins (เคลียร์โจทย์ วางขอบเขต ทำ brief), or asks to execute a WORKING-BRIEF.md.
 ---
 
 # Ask Me
 
-เปลี่ยนความคิดที่ยังไม่ชัดให้เป็น Source of Truth ที่พร้อมส่งต่อ ก่อนเริ่มลงมือทำงานจริง
+Turn an unclear idea into a confirmed source of truth before any real work starts — then, only if the user chooses, help execute it with the right model for each task.
 
-## กติกาหลัก
+## Ground rules
 
-- สนทนาด้วยภาษาเดียวกับผู้ใช้ หากผู้ใช้พิมพ์ภาษาไทย ให้ใช้ภาษาไทยที่อ่านง่ายและคงศัพท์เฉพาะภาษาอังกฤษเมื่อช่วยให้เข้าใจตรงกัน
-- ดูบทสนทนา ไฟล์ โฟลเดอร์ เอกสารแบรนด์ และบริบทที่ผู้ใช้อนุญาตก่อนถาม หากค้นหาข้อเท็จจริงได้ ให้ค้นหาแทนการถาม
-- แยก **ข้อเท็จจริง** ออกจาก **การตัดสินใจ** และ **สมมติฐาน** การตัดสินใจเป็นของผู้ใช้เสมอ
-- ถามครั้งละหนึ่งคำถามและรอคำตอบก่อนถามข้อต่อไป
-- ทุกคำถามที่เป็นการตัดสินใจต้องมีคำแนะนำ พร้อมเหตุผลสั้น ๆ ตัวเลือกอื่นให้แสดงเฉพาะเมื่อช่วยตัดสินใจ
-- อย่าถามซ้ำสิ่งที่ผู้ใช้ตอบแล้ว และอย่าถามเรื่องที่ไม่ส่งผลต่อผลลัพธ์
-- หนึ่ง Working Brief ต้องมีหนึ่ง Outcome หรือ Deliverable หลัก งานคนละผลลัพธ์ให้แยก Brief ใหม่ แม้อยู่ใน Project เดียวกัน
-- หยุดเมื่อ Working Brief ได้รับการยืนยัน ห้ามเริ่มสร้าง Deliverable เขียนโค้ด ออกแบบ หรือดำเนินงานต่อ เว้นแต่ผู้ใช้สั่งต่อในภายหลังอย่างชัดเจน
+- Converse in the user's language. If the user writes Thai, use easy-to-read Thai and keep technical terms in English where that aids shared understanding.
+- Separate **facts**, **decisions**, and **assumptions**. A fact is anything answerable from the conversation, files, project docs, or lookup — find it, never ask it. A decision (what to build, how it should behave) always belongs to the user. Assumptions must be labeled as assumptions.
+- Ask exactly one question at a time and wait for the answer before the next.
+- Every decision question carries a recommendation and a short reason. Show other options only when they genuinely help the user choose.
+- Never re-ask what the user already answered; never ask what does not affect the outcome.
+- One Working Brief has exactly one main outcome or deliverable. A different outcome gets a new brief, even inside the same project.
+- Nothing is built, designed, written, or produced until the user explicitly chooses to continue after the brief is confirmed.
 
-## ขั้นตอนทำงาน
+## Phase 1 — Recon (before asking anything)
 
-### 1. กำหนดขอบเขตของ Brief
+State briefly what outcome the user seems to want from what is already known. If unclear, start with the question that best separates possible outcomes.
 
-สรุปเบื้องต้นว่าผู้ใช้อยากได้ผลลัพธ์อะไรจากข้อมูลที่มี หากยังไม่ชัด ให้เริ่มจากคำถามที่แยก Outcome ได้มากที่สุด
+Check only relevant context the user has given access to: the conversation, attached files, the working folder, brand documents, `PROJECT-CONTEXT.md`, code or technical docs when the task is a system, and earlier briefs about the same outcome.
 
-หากพบ Working Brief เดิม:
+- Reuse an existing brief only for the same outcome. A new deliverable, a new audience, or a different set of success criteria = a new brief.
+- Never auto-carry a finished brief from last month into today's requirements. Long-term company or brand context is not a requirements store.
 
-- ใช้ Brief เดิมต่อเมื่อเป็น Outcome เดียวกัน
-- เริ่ม Brief ใหม่เมื่อเป็น Deliverable ใหม่ คนละกลุ่มเป้าหมาย หรือมีเกณฑ์สำเร็จคนละชุด
-- อย่านำ Brief ที่เสร็จแล้วของเดือนก่อนมาเป็น Requirement ปัจจุบันโดยอัตโนมัติ
-- ถือว่า `PROJECT-CONTEXT.md` เอกสารแบรนด์ และข้อมูลบริษัทเป็นบริบทระยะยาว ไม่ใช่ที่เก็บ Requirement ของทุกงาน
+Summarize what recon found in a few lines before the first question, so the user sees what will NOT be asked.
 
-### 2. สำรวจ Context ก่อนสัมภาษณ์
+## Phase 2 — Interview
 
-ตรวจเฉพาะข้อมูลที่เกี่ยวข้องและอยู่ในขอบเขตที่ผู้ใช้อนุญาต เช่น:
+Interview relentlessly until you reach shared understanding: walk down each branch of the decision tree, resolving dependencies between decisions one by one. One question at a time. Never bundle questions.
 
-- บทสนทนาและไฟล์ที่แนบมา
-- โฟลเดอร์งาน เอกสารแบรนด์ ตัวอย่างเดิม และข้อกำหนดของ Project
-- โค้ด ระบบเดิม หรือเอกสาร Technical เมื่อโจทย์เป็นงานพัฒนาระบบ
-- Brief เดิมที่เกี่ยวกับ Outcome เดียวกัน
-
-สรุปสิ่งที่ทราบแล้วแบบสั้น ๆ ภายในบทสนทนา อย่าให้ผู้ใช้กรอกข้อมูลที่หาได้เอง
-
-### 3. เดินตาม Decision Tree
-
-ถามจากการตัดสินใจที่ส่งผลกว้างที่สุดไปหารายละเอียด โดยใช้รูปแบบที่อ่านเร็ว:
+Format every decision question (rendered in the user's language):
 
 ```text
-คำถาม: <ถามการตัดสินใจเพียงเรื่องเดียว>
-คำแนะนำ: <คำตอบที่แนะนำ>
-เพราะ: <เหตุผลสั้น ๆ ที่ผูกกับ Outcome หรือข้อจำกัด>
+Question: <one decision only>
+Recommendation: <suggested answer>
+Because: <short reason tied to the outcome or a constraint>
 ```
 
-หากผู้ใช้ไม่แน่ใจ ให้เสนอค่าเริ่มต้นที่ปลอดภัยและบอกผลกระทบ ผู้ใช้สามารถตอบว่า “ตามที่แนะนำ” ได้
+- If the user is unsure, offer a safe default and state its consequence. "As recommended" is a valid answer — record the recommendation as the decision. It accepts only the single question just asked: never present several recommendations at once for blanket acceptance.
+- Push back politely when a new answer contradicts an earlier one; the user picks which answer stands. Never silently decide on the user's behalf.
+- **Mandatory minimums — always asked, even if the user rushes:**
+  1. **Deliverable format** — what will be delivered, in what format and channel.
+  2. **Success criteria** — concrete, checkable conditions for "done and accepted".
+- Choose question areas by what affects the outcome: channels, structure, voice, CTA for content and design work; customers, offer, pricing, operations for products, services, restaurants, tours; users, roles, workflow, data, integrations, error cases, security for systems and code; owners, handoffs, tools, cycle times, approvers, metrics for internal processes and B2B. Skip areas that do not apply — this is thinking, not a form.
 
-ทักท้วงอย่างสุภาพเมื่อคำตอบใหม่ขัดกับคำตอบเดิม แล้วให้ผู้ใช้เลือกว่าจะยึดข้อใด อย่าตัดสินใจแทนแบบเงียบ ๆ
+### Coverage Ledger — required before drafting
 
-### 4. เลือกคำถามให้เหมาะกับงาน
+Before drafting the Working Brief, display a ledger in which every core topic carries exactly one status:
 
-ตรวจให้ครบเฉพาะหัวข้อที่มีผลต่อ Outcome:
+- ✅ **answered** — the user decided this in the interview (cite the answer in a few words)
+- 📄 **from context** — found during recon; cite the exact source (file name and section, or the specific user message). A 📄 without a named source is invalid — treat the topic as unanswered and ask.
+- ➖ **not relevant** — with a one-line reason
 
-- **แกนกลาง:** ผลลัพธ์ที่ต้องการ ปัญหาหรือเหตุผล กลุ่มเป้าหมาย Deliverable และ Format ขอบเขต ข้อจำกัด และเกณฑ์สำเร็จ
-- **คอนเทนต์/ดีไซน์/PDF/เว็บไซต์:** ช่องทาง โครงสร้าง เนื้อหาบังคับ Brand Voice ภาษา Call to Action และไฟล์อ้างอิง
-- **สินค้า/บริการ/ร้านอาหาร/ทัวร์:** ลูกค้า Offer ราคา Route หรือประสบการณ์ ข้อจำกัดการขาย การปฏิบัติงาน และข้อมูลที่ต้องถูกต้อง
-- **ระบบ/CRM/Chatbot/โค้ด:** ผู้ใช้และสิทธิ์ Workflow ข้อมูล Integration กรณีผิดพลาด Security การ Deploy และ Acceptance Criteria
-- **กระบวนการภายใน/B2B:** ผู้รับผิดชอบ จุดส่งต่องาน เครื่องมือ รอบเวลา ผู้มีอำนาจอนุมัติ และตัวชี้วัด
+Core topics: **Outcome · Problem & audience · Deliverable & format · Scope (in/out) · Constraints & key decisions · Success criteria**
 
-อย่าไล่ถามทุกหัวข้อเป็นแบบฟอร์ม หากหัวข้อใดไม่เกี่ยวข้องให้ข้าม
+Rules:
+- Drafting the brief while any topic is status-less is forbidden.
+- Deliverable & format and Success criteria can only ever be ✅ — they must have been asked.
+- Outcome, Problem & audience, and Scope can only be ✅ or 📄 — real work always has these; ➖ is reserved for Constraints & key decisions.
+- The ledger is evidence, not a new checklist: it shows the interview criterion was actually met. The user may redirect ("ask more about X") before any draft exists.
 
-### 5. ตรวจ Stop Condition
+## Phase 3 — Working Brief
 
-Working Brief พร้อมยืนยันเมื่อ:
+When the ledger is complete, show a concise draft and ask exactly one question: confirm this Working Brief, or fix which part? If fixes are needed, return to one-question-at-a-time. Loop until confirmed.
 
-- มี Outcome เดียวที่ชัดเจน
-- ระบุผู้ใช้หรือกลุ่มเป้าหมายที่เกี่ยวข้องแล้ว
-- รู้ว่าจะส่งมอบอะไร ใน Format หรือช่องทางใด
-- ขอบเขตในงานและนอกงานไม่ขัดกัน
-- Requirement และข้อจำกัดสำคัญถูกตัดสินใจแล้ว
-- มีเกณฑ์ที่ใช้ตรวจว่า “เสร็จและผ่าน”
-- ไม่มีคำถามค้างที่ทำให้ผู้ลงมือทำต้องเดาเรื่องสำคัญ
-
-เมื่อครบ ให้แสดง Draft แบบกระชับและถามเพียงคำถามเดียว:
-
-> ยืนยัน Working Brief นี้เลย หรืออยากแก้จุดไหนก่อน?
-
-หากต้องแก้ ให้กลับเข้าสู่วงรอบคำถามทีละข้อ หากผู้ใช้ยืนยัน ให้จัดทำฉบับสุดท้ายแล้วหยุด
-
-## รูปแบบ Working Brief
-
-ใช้เฉพาะหัวข้อที่เกี่ยวข้อง ไม่ใส่หัวข้อว่างและไม่คัดลอกบทสนทนาทั้งหมด:
+Template — section headers in English, body in the user's language. Include only sections that apply; never leave empty headers; never copy the conversation transcript:
 
 ```markdown
-# Working Brief: <ชื่อ Outcome>
+# Working Brief: <outcome name>
 
 - Status: Confirmed
-- Brief ID: <วันที่และชื่อย่อ>
-- Updated: <วันที่>
+- Brief ID: <date + short name>
+- Updated: <date>
 
 ## Outcome
-<ผลลัพธ์เดียวที่ต้องการ>
+<the single desired outcome>
 
 ## Context
-<ปัญหา เหตุผล และข้อเท็จจริงที่จำเป็น>
+<problem, reasons, and essential facts>
 
 ## Audience / Users
-<ผู้รับ ผู้ใช้ หรือกลุ่มเป้าหมาย>
+<recipients, users, or target groups>
 
 ## Deliverable
-<สิ่งที่จะส่งมอบ Format และช่องทาง>
+<what will be delivered, format, and channel>
 
 ## In Scope
-- <สิ่งที่ต้องมี>
+- <what must be included>
 
 ## Out of Scope
-- <สิ่งที่ไม่ทำในรอบนี้>
+- <what is not done this round>
 
 ## Requirements & Decisions
-- <ข้อตกลงที่ต้องยึดตาม>
+- <agreements the work must follow>
 
 ## Sources & Constraints
-- <ไฟล์อ้างอิง แบรนด์ ข้อมูล เวลา งบ ระบบ กฎหมาย หรือข้อจำกัดอื่น>
+- <reference files, brand, data, time, budget, systems, legal, or other limits>
 
 ## Success Criteria
-- <เกณฑ์ตรวจรับที่สังเกตหรือทดสอบได้>
+- <acceptance conditions that can be observed or tested>
 
 ## Open Items
-- <เฉพาะเรื่องที่ไม่ขวางการเริ่มงาน พร้อมผู้รับผิดชอบถ้ามี>
+- <only items that do not block starting, with an owner if known>
 
 ## Next Step
-<ขั้นต่อไปเพียงขั้นเดียว โดยยังไม่ลงมือทำ>
+<the single next step, without starting the work>
 ```
 
-หากมีสิทธิ์เขียนไฟล์ ให้บันทึกเป็น `briefs/<YYYY-MM-DD>-<ชื่อสั้น>/WORKING-BRIEF.md` เว้นแต่ผู้ใช้กำหนดที่อื่น ห้ามเขียนทับ Brief คนละ Outcome หากเขียนไฟล์ไม่ได้ ให้ส่ง Markdown ฉบับเต็มในแชต
+File convention: save to `briefs/<YYYY-MM-DD>-<short-name>/WORKING-BRIEF.md` unless the user names another location. Never overwrite a brief for a different outcome. If file writing is unavailable, output the full Markdown in chat.
 
-## Quality Gate
+Quality gate before finalizing:
+- The brief stands alone — a person or agent can start work from it without reading this conversation.
+- Facts, decisions, and assumptions are not mixed.
+- Deliverable format is explicit; every success criterion is checkable.
+- Concise: no Q&A history, nothing that does not affect the work.
 
-ก่อนส่งฉบับสุดท้าย ตรวจว่า:
+## Phase 4 — Next step (after confirmation)
 
-- Brief อ่านเดี่ยว ๆ แล้ว Agent หรือคนอื่นเริ่มงานต่อได้โดยไม่ต้องอ่านบทสนทนาเก่า
-- ข้อเท็จจริง การตัดสินใจ และสมมติฐานไม่ปะปนกัน
-- Format ของ Deliverable ระบุชัด ไม่ว่าจะเป็น PDF เว็บไซต์ Route ทัวร์ CRM LINE Chatbot หรือโค้ด
-- Success Criteria ตรวจสอบได้
-- เนื้อหากระชับ ไม่มีประวัติการถามตอบหรือรายละเอียดที่ไม่ส่งผลต่อการทำงาน
-- หยุดที่ Working Brief และรอคำสั่งใหม่
+Never end at the brief silently, and never start work on your own. Ask exactly one question with three options:
 
-## ตัวอย่างการเรียกใช้
+1. **Continue here** — enter Execute Mode below.
+2. **Handoff** — produce a ready-to-paste prompt for another agent or person. Reference the brief file when it exists; otherwise embed the brief in full. Use this template (rendered in the user's language):
+
+   ```text
+   Read <briefs/.../WORKING-BRIEF.md | the brief below> and produce the deliverable exactly as specified.
+   Rules: follow the brief verbatim. If something essential is missing, ask — do not invent requirements.
+   Before reporting done, verify the result against every item in Success Criteria and report the evidence per item.
+   ```
+
+3. **Park it** — confirm where the brief is saved and show how to resume later: `/ask-me execute briefs/<folder>/WORKING-BRIEF.md` (on agents without slash commands: "Use Ask Me to execute <file>"). If no file could be saved, give the user the full brief in one copyable block instead, with the instruction to paste it into a future session as "Use Ask Me to execute this brief".
+
+## Execute Mode
+
+Entry: from the menu above, or directly via `/ask-me execute <path/to/WORKING-BRIEF.md>` — then read the brief first and re-ask nothing it already answers.
+
+### 1. Assess
+
+Break the brief into tasks. Classify each task's required capability:
+
+- **judgment-heavy** — design decisions, architecture, strategy, final review
+- **standard production** — building or writing to a spec that is already clear
+- **mechanical** — renames, reformatting, repeated transforms
+
+### 2. Recommend models — relative routing
+
+Reference ladder — a reference, not a doctrine; tell the user to edit it to match the models their plan and tools actually offer:
+
+| Capability tier | Claude | Codex (GPT-5.6) |
+|---|---|---|
+| Top | Opus | Sol |
+| Mid | Sonnet | Terra |
+| Small | Haiku | Luna |
+
+Match model tier to the nature of the task, starting from the model the user already uses — up, down, or stay. The goal is value for money, not ritual.
+
+1. Identify the user's current model from context; if unknown, ask once now (this is the only extra question Execute Mode may add).
+2. For each task, compare its required tier with the current model and recommend one direction:
+   - **Stay** (default) — the task fits the current model, or is too small to be worth switching. A user who talks with a mid model and whose plan is ready can let that same model produce it.
+   - **Downshift** — the plan is clear and the production chunk is large; a cheaper tier does it and saves quota (e.g. Sonnet→Haiku, Terra→Luna).
+   - **Escalate** — this task exceeds the current model; recommend the higher tier for this task only (e.g. a hard architecture task while talking with Sonnet → recommend Opus; with Terra → recommend Sol).
+3. Present one table — task · required tier · recommended model · reason — then STOP and wait for the user's approval. Never execute an unapproved plan.
+
+### 3. Run — the user picks the mechanism
+
+1. **Run here** — same session. Right when tasks are small or the current model already fits.
+2. **Subagent** — only where the platform can dispatch sub-tasks with a chosen model (for example Claude Code). Send each production task with its full task spec so the subagent starts from a fresh context; it follows the spec, it does not invent.
+3. **New session** — give the user a ready-to-paste line: `/ask-me execute <path>` plus the recommended model to open the new session with (if no file exists, one copyable block containing "Use Ask Me to execute this brief" plus the full brief). This is the cheapest path on limited plans: end the conversation on the expensive model and let the recommended model do the production in a fresh window.
+
+Completeness gate: when work will run in a fresh context (mechanisms 2–3), the brief/plan must contain everything the executor needs — every wording, structure, and criterion — so it can work without guessing. Fix gaps in the brief first; never let an executor improvise.
+
+### 4. Review
+
+Check finished work against Success Criteria with judgment-tier attention (this session, or a fresh-context reviewer where subagents exist).
+
+- Round 1 fail → the same model fixes per feedback.
+- Round 2 fail → escalate one tier and redo the task.
+- Round 3 fail → stop and report to the user. Never loop past three rounds.
+
+## Invocation examples
 
 - `Ask Me เรื่องออกแบบ Route ทัวร์จีนใหม่`
 - `/ask-me ช่วยเคลียร์โจทย์ระบบ CRM สำหรับทีมขาย`
 - `$ask-me ก่อนทำเว็บไซต์ร้านไอศกรีม ช่วยถามฉันทีละข้อ`
 - `ใช้ Ask Me ทำ Working Brief สำหรับ PDF แนะนำบริการ B2B`
+- `/ask-me execute briefs/2026-07-24-crm/WORKING-BRIEF.md`
+
+## Red flags — stop and re-read this skill
+
+- More than one question in a single message.
+- A decision question without a recommendation.
+- Drafting a brief with no ledger shown, or with a status-less topic.
+- Starting any production work without the user choosing it after the confirmed brief.
+- Recommending a model switch as ritual when staying is cheaper and good enough.
+- An executor inventing content or requirements not in the brief.

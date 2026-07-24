@@ -24,11 +24,13 @@
        ↓
 ถามทีละข้อ + แนะนำคำตอบ
        ↓
-ยืนยันขอบเขตและเกณฑ์สำเร็จ
+Coverage Ledger — หลักฐานว่าครบก่อนสรุป
        ↓
-WORKING-BRIEF.md
+WORKING-BRIEF.md (ยืนยันแล้ว)
        ↓
-ส่งต่อให้คนหรือ AI Agent ลงมือทำ
+เลือกเอง: ทำต่อเลย · Handoff · พักไว้
+       ↓
+Execute Mode — แนะนำโมเดลที่คุ้มค่าต่องาน (ถ้าเลือกทำต่อ)
 ```
 
 ## ใช้กับอะไรได้บ้าง
@@ -136,6 +138,33 @@ Working Brief จึงปรับตามคำตอบของผู้ใ
 | CRM / LINE Chatbot | Roles, Workflow, Data, Integration, Permission และกรณีผิดพลาด |
 | คอนเทนต์ / PDF | Audience, Message, Structure, Tone, CTA, Source และรูปแบบส่งมอบ |
 
+## ใหม่ใน v2
+
+v2 ยกเครื่องข้างในทั้งหมดจาก workflow ภายในที่ Mew Social ใช้ทำงานจริงทุกวัน โดยหน้าตาการใช้งานเดิมไม่เปลี่ยน:
+
+- **สัมภาษณ์ลึกขึ้น** — เดิน Decision Tree จนทุกกิ่งถูกตัดสิน และบังคับถาม 2 เรื่องเสมอ: Deliverable Format และ Success Criteria
+- **Coverage Ledger** — ก่อนร่าง Brief ทุกครั้ง Agent ต้องแสดงตารางหลักฐานว่าแต่ละหัวข้อแกนกลาง "ถามแล้ว / เจอใน Context / ไม่เกี่ยวเพราะอะไร" — ปิดปัญหาถามไม่กี่ข้อแล้วรีบสรุป
+- **จบ Brief แล้วไม่ตัน** — ยืนยัน Brief เสร็จจะมีเมนู 3 ทางให้เลือกเอง: **ทำต่อเลย** ที่นี่ · **Handoff** รับ Prompt สำเร็จรูปไปวางให้ Agent หรือคนอื่นทำ · **พักไว้** แล้วกลับมาต่อด้วย `/ask-me execute <ไฟล์>`
+- **Execute Mode** — ถ้าเลือกทำต่อ Agent จะแตกงานเป็นชิ้น แล้วแนะนำว่าแต่ละชิ้นควรใช้โมเดลไหนถึงคุ้มที่สุด ก่อนเริ่มต้องขออนุมัติแผนเสมอ
+
+### แนะนำโมเดลแบบสัมพัทธ์ — หัวใจของ Execute Mode
+
+ไม่มีสูตรตายตัวว่า "ต้องคุยกับตัวท็อปเสมอ" — จุดตั้งต้นคือโมเดลที่คุณใช้ยืนพื้นอยู่แล้ว ไม่ว่าจะจ่ายแผน $10 หรือ $200:
+
+| ระดับ | Claude | Codex (GPT-5.6) |
+|---|---|---|
+| Top | Opus | Sol |
+| Mid | Sonnet | Terra |
+| Small | Haiku | Luna |
+
+Agent จะเทียบ "ลักษณะงาน" กับ "ตัวที่คุณใช้อยู่" แล้วแนะนำ 1 ใน 3 ทิศ:
+
+- **อยู่ตัวเดิม** — งานพอดีมือ หรือเล็กเกินกว่าจะคุ้มสลับ (คุยกับ Terra อยู่ แผนชัดแล้ว ก็ให้ Terra ผลิตต่อเลย)
+- **ลดระดับ** — แผนชัดและงานผลิตก้อนใหญ่ ส่งให้ตัวถูกกว่าทำ ประหยัดโควตา (Sonnet→Haiku, Terra→Luna)
+- **ยกระดับ** — เฉพาะชิ้นที่เกินมือตัวยืนพื้น ค่อยแนะนำตัวท็อป (คุยกับ Sonnet แล้วเจองาน Architecture ยาก → แนะนำ Opus)
+
+ตารางโมเดลเป็นเพียง Reference — แก้ให้ตรงกับโมเดลที่แผนและเครื่องมือของคุณมีได้เลย เป้าหมายคือได้งานมีคุณภาพโดยวางแผนการใช้โมเดลอย่างคุ้มค่า ไม่ใช่พิธีกรรม
+
 ## หนึ่ง Project ใช้ได้หลาย Brief
 
 หนึ่ง Project อาจมีงานต่อเนื่องหลายเดือน แต่ไม่ควรรวมทุกอย่างไว้ใน Working Brief เดียว
@@ -191,6 +220,8 @@ Ask Me ถูกออกแบบให้ผู้เรียนเริ่�
 Workflow นี้ได้รับแรงบันดาลใจจาก [`grill-me`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me), [`grilling`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling) และ [`grill-with-docs`](https://github.com/mattpocock/skills/tree/main/skills/engineering/grill-with-docs) ของ [Matt Pocock](https://github.com/mattpocock/skills) ภายใต้ MIT License
 
 Ask Me ดัดแปลงให้เหมาะกับผู้เรียนไทยและงานธุรกิจหลายรูปแบบ โดยเพิ่ม Working Brief, Stop Condition, การแยก Project Context ออกจาก Brief และกติกาหนึ่ง Outcome ต่อหนึ่ง Brief
+
+ส่วน Execute Mode และการแนะนำโมเดลแบบสัมพัทธ์ใน v2 ต่อยอดจาก Kickoff Pipeline ภายในที่ Mew Social ใช้ทำงานจริง โดยปรับให้เป็นกลางต่อทุกค่ายโมเดลและทุกระดับแผนราคา
 
 ## License
 

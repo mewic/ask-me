@@ -1,7 +1,7 @@
 {
   "name": "mewsocial",
-  "version": "1.0.0",
-  "description": "Thai-first Agent Skills by Mew Social, including Ask Me for creating a confirmed Working Brief before execution.",
+  "version": "2.0.0",
+  "description": "Thai-first Agent Skills by Mew Social. Ask Me interviews one decision at a time into a confirmed Working Brief, then optionally executes it with cost-effective model routing.",
   "author": {
     "name": "Mew Social",
     "url": "https://github.com/mewic"
@@ -20,7 +20,7 @@
   "interface": {
     "displayName": "Mew Social",
     "shortDescription": "Thai-first workflows for clearer AI collaboration.",
-    "longDescription": "Mew Social packages practical Thai-first Agent Skills. Ask Me interviews users one decision at a time and creates a confirmed Working Brief before any execution begins.",
+    "longDescription": "Mew Social packages practical Thai-first Agent Skills. Ask Me interviews users one decision at a time, shows a coverage ledger before drafting, creates a confirmed Working Brief, and can then plan execution with cost-effective model routing — the user always approves before any work starts.",
     "developerName": "Mew Social",
     "category": "Productivity",
     "capabilities": [
