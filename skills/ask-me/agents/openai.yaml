@@ -1,4 +1,4 @@
 interface:
   display_name: "Ask Me"
-  short_description: "ถามทีละข้อจนได้ Working Brief ที่พร้อมใช้"
-  default_prompt: "ใช้ $ask-me ถามฉันทีละข้อเพื่อเปลี่ยนไอเดียนี้เป็น Working Brief ที่ยืนยันแล้ว"
+  short_description: "ถามเป็นรอบจนได้ Working Brief ที่พร้อมใช้"
+  default_prompt: "ใช้ $ask-me ถามฉันให้ครบเพื่อเปลี่ยนไอเดียนี้เป็น Working Brief ที่ยืนยันแล้ว"

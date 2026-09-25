@@ -1,7 +1,7 @@
 {
   "name": "mewsocial",
-  "version": "2.0.0",
-  "description": "Thai-first Agent Skills by Mew Social. Ask Me interviews one decision at a time into a confirmed Working Brief, then optionally executes it with cost-effective model routing.",
+  "version": "3.0.0",
+  "description": "Thai-first Agent Skills by Mew Social. Ask Me interviews in rounds — every question that can be asked now, each with a recommended answer — into a confirmed Working Brief, then hands it to whoever does the work.",
   "author": {
     "name": "Mew Social",
     "url": "https://github.com/mewic"
